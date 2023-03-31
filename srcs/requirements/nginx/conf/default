@@ -1,0 +1,36 @@
+server {
+    # Listen on port 443 using the SSL protocol
+    listen 443 ssl;
+
+    # Set the server name to your domain name
+    server_name login.42.fr;
+
+    # Set the SSL certificate and key files
+    ssl_certificate /etc/ssl/certs/nginx.crt;
+    ssl_certificate_key /etc/ssl/private/nginx.key;
+
+    # Set the default file to be served
+    index index.php;
+
+    # Set the root directory of the website files
+    root /var/www/html;
+
+    # Enable PHP processing for PHP files
+    location ~ \.php$ {
+        # Forward the request to the PHP-FPM service
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+
+        # Set the index file for PHP
+        fastcgi_index index.php;
+
+        # Set the fastcgi parameters
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+    }
+
+    # Serve static files directly
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}

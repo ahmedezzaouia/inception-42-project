@@ -1,0 +1,19 @@
+# Set the base image to Debian Buster
+FROM debian:buster
+
+# Update the package repository and install necessary packages
+RUN apt-get update && apt-get install -y nginx openssl
+
+# Generate a self-signed SSL certificate for HTTPS
+RUN  openssl req -x509 -nodes -days 365 -newkey rsa:4096 \
+    -keyout /etc/ssl/private/nginx.key -out /etc/ssl/certs/nginx.crt \
+    -subj "/C=FR/ST=Ile-de-France/L=Paris/O=42/CN=login.42.fr"
+
+# Copy the NGINX configuration file to the container
+COPY ./conf/default /etc/nginx/sites-enabled/default
+
+# Expose port 443 for HTTPS traffic
+EXPOSE 443
+
+# Set the command to start NGINX and run it as a foreground process
+CMD ["nginx", "-g", "daemon off;"]
