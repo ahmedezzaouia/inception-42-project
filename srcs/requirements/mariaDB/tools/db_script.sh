@@ -20,6 +20,9 @@ mysql < db1.sql
 
 # Stop the MySQL service
 service mysql stop
+
+# Kill the MySQL process
 kill $(cat /var/run/mysqld/mysqld.pid)
-# Restart the MySQL service
+
+# Restart the MySQL service with the IP address set to 0.0.0.0
 mysqld --bind-address=0.0.0.0

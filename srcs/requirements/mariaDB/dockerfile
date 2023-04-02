@@ -1,23 +1,20 @@
+# Sets the base image for the container
 FROM debian:buster
 
-# Switch to root user
-# USER root
-
-# ==> apt-get, to get the last version of packages
+# Updates the package lists in the image and upgrades any installed packages
 RUN apt-get update && apt-get upgrade -y
 
-# ==> Install MariaDB server (MySQL)
+# Installs the MariaDB server package in the image
 RUN apt-get install mariadb-server -y
 
-# RUN chmod 644 /etc/mysql/mariadb.conf.d/50-server.cnf
-
-# COPY tools/50.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
-
-
+# Copies the `db_script.sh` file from the `tools` directory on the local machine to the root directory of the image
 COPY tools/db_script.sh /
+
+# Sets the executable permission on the `db_script.sh` file in the image
 RUN chmod +x db_script.sh
 
-
+# Specifies that the container should expose port 3306, which is the default port for MariaDB
 EXPOSE 3306
 
+# Specifies the entry point command for the container, which runs the `db_script.sh` script when the container starts.
 ENTRYPOINT ["bash", "db_script.sh"]

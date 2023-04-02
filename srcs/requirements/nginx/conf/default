@@ -1,7 +1,7 @@
-
 server {
-    # Listen on port 443 using the SSL protocol
+    # Listen on port 443 using the SSL protocol with TLSv1.2 and TLSv1.3 only
     listen 443 ssl;
+    ssl_protocols TLSv1.2 TLSv1.3;
 
     # Set the server name to your domain name
     server_name ahmez-za.1337.ma;

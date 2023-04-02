@@ -29,8 +29,6 @@ services:
   mariadb:
     container_name: mariadb
     build: ./requirements/mariadb
-    # environment:
-    #   DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     env_file:
       - .env
     volumes:
