@@ -12,8 +12,13 @@
 
 
 # Start the Docker containers defined in the docker-compose.yml file
-all: 
+all: init
 	@docker-compose -f ./srcs/docker-compose.yml up
+
+# Create directories required for volumes
+init:
+	@sh ./create_volumes.sh
+
 
 # Stop and remove the Docker containers defined in the docker-compose.yml file
 down:
