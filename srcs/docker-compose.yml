@@ -3,13 +3,11 @@ version: "3"
 
 networks:
   inception-network:
-    name: inception-network
     driver: bridge
 
 volumes:
   wordpress:
     driver: local
-    name: wordpress
     driver_opts:
       type: none
       o: bind
@@ -17,7 +15,6 @@ volumes:
 
   mariadb:
     driver: local
-    name: mariadb
     driver_opts:
       type: none
       o: bind
