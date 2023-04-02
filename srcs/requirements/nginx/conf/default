@@ -4,7 +4,7 @@ server {
     ssl_protocols TLSv1.2 TLSv1.3;
 
     # Set the server name to your domain name
-    server_name ahmez-za.1337.ma;
+    server_name ahmez-za.42.fr;
 
     # Set the SSL certificate and key files
     ssl_certificate /etc/ssl/certs/nginx.crt;

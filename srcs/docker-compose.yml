@@ -50,7 +50,6 @@ services:
       - inception-network
     restart: unless-stopped
     
-
   nginx:
     container_name: nginx
     build: ./requirements/nginx
@@ -63,6 +62,3 @@ services:
     networks:
       - inception-network
     restart: unless-stopped
-
-
-
