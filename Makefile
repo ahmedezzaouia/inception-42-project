@@ -25,11 +25,12 @@ re:
 
 # Stop and remove all running Docker containers, remove all Docker images, remove all Docker volumes, and remove all Docker networks
 clean:
-	@docker stop $$(docker ps -qa);\
-	@docker rm $$(docker ps -qa);\
-	@docker rmi -f $$(docker images -qa);\
-	@docker volume rm $$(docker volume ls -q);\
-	@docker network rm $$(docker network ls -q);\
+	@docker stop $$(docker ps -aq) || true
+	@docker rm -f $$(docker ps -aq) || true
+	@docker rmi -f $$(docker images -aq) || true
+	@docker volume rm $$(docker volume ls -q) || true
+	@docker network rm $$(docker network ls -q) || true
+
 
 # Declare the all, re, down, and clean targets as phony targets to ensure they are always executed regardless of whether a file with the same name exists
 .PHONY: all re down clean
