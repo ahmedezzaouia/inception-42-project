@@ -1,12 +1,23 @@
 FROM debian:buster
 
+# Switch to root user
+# USER root
 
-RUN apt-get update -y && apt-get install mariadb-server -y
+# ==> apt-get, to get the last version of packages
+RUN apt-get update && apt-get upgrade -y
 
-# COPY ./tools/50-server.cnf /etc/mysql/mariadb.conf.d/
+# ==> Install MariaDB server (MySQL)
+RUN apt-get install mariadb-server -y
 
-COPY ./tools/db_script.sh /
+# RUN chmod 644 /etc/mysql/mariadb.conf.d/50-server.cnf
+
+# COPY tools/50.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+
+
+COPY tools/db_script.sh /
 RUN chmod +x db_script.sh
-# RUN  service mysql start
-# RUN ./db_script.sh
-CMD ["./db_script.sh"]
+
+
+EXPOSE 3306
+
+ENTRYPOINT ["bash", "db_script.sh"]

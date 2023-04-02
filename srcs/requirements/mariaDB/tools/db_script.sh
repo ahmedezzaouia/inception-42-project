@@ -12,9 +12,6 @@ echo "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS' ;" >> db
 # Add to the SQL file the command to grant all privileges to the user on the specified database
 echo "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%' ;" >> db1.sql
 
-# Add to the SQL file the command to alter the root user's password
-echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ROOT' ;" >> db1.sql
-
 # Add to the SQL file the command to flush the privileges to ensure the changes take effect
 echo "FLUSH PRIVILEGES;" >> db1.sql
 
@@ -25,4 +22,4 @@ mysql < db1.sql
 service mysql stop
 kill $(cat /var/run/mysqld/mysqld.pid)
 # Restart the MySQL service
-mysqld
+mysqld --bind-address=0.0.0.0
