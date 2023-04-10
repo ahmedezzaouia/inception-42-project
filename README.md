@@ -1,5 +1,9 @@
 # Incpetion
- 
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/kema-dev/inception/main/assets/docker_moby.png" alt="Diagram" height="400">
+</p>
+
 ## Description
 This project consists of setting up a small infrastructure composed of different services under specific rules. The whole project has to be done in a virtual machine using Docker Compose. Each Docker image must have the same name as its corresponding service, and each service must run in a dedicated container. 
 
@@ -28,7 +32,9 @@ The following services must be set up:
 Your containers must restart in case of a crash.
 
 ## Diagram
-![Diagram](https://raw.githubusercontent.com/izenynn/inception/main/diagram.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/izenynn/inception/main/diagram.png" alt="Diagram" height="600" width="100%">
+</p>
 
 ## Installation
 1. Clone this repository
